@@ -7,6 +7,7 @@ import os
 from os import path
 import shutil
 from zipfile import ZipFile
+import urllib.request
 
 def power(a, b=1):
     result = 1
@@ -42,18 +43,22 @@ class anotherClass(myClass):
         print("myDef1 from anotherClass")
 
 def main():
-    if path.exists("helloPython.txt") :
-        src = path.realpath("helloPython.txt")
-        head, tail = path.split(src)
-        print("path: {p}\r\nfile: {f}".format(p=head, f=tail))
-        dst = src + ".bak"
-        shutil.copy(src, dst)
-        shutil.copystat(src, dst)
-        os.rename(dst, "bak"+tail)
-        # shutil.make_archive("helloArchive", "zip", head)
-        with ZipFile("helloPython.zip", "w") as myzip :
-            myzip.write("helloPython.txt")
-            myzip.write("bakhelloPython.txt")
+    with urllib.request.urlopen("http://www.google.com") as webURL:
+         code = webURL.getcode()
+         html = webURL.read()
+         print(str(code)+" : "+str(html))
+    # if path.exists("helloPython.txt") :
+    #     src = path.realpath("helloPython.txt")
+    #     head, tail = path.split(src)
+    #     print("path: {p}\r\nfile: {f}".format(p=head, f=tail))
+    #     dst = src + ".bak"
+    #     shutil.copy(src, dst)
+    #     shutil.copystat(src, dst)
+    #     os.rename(dst, "bak"+tail)
+    #     # shutil.make_archive("helloArchive", "zip", head)
+    #     with ZipFile("helloPython.zip", "w") as myzip :
+    #         myzip.write("helloPython.txt")
+    #         myzip.write("bakhelloPython.txt")
     # print(os.name)
     # print("Item exists: " + str(path.exists("helloPython.txt")))
     # print("Item is a file: " + str(path.isfile("helloPython.txt")))
@@ -94,4 +99,4 @@ def main():
     # anotherVar.myDef2(yourValue2)
 
 if __name__ == "__main__":
-    main()
+     main()
