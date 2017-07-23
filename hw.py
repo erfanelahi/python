@@ -8,6 +8,7 @@ from os import path
 import shutil
 from zipfile import ZipFile
 import urllib.request
+import json
 
 def power(a, b=1):
     result = 1
@@ -41,12 +42,15 @@ class anotherClass(myClass):
         print("This is anotherDef1")
     def myDef1(self):
         print("myDef1 from anotherClass")
-
 def main():
-    with urllib.request.urlopen("http://www.google.com") as webURL:
+    with urllib.request.urlopen("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson") as webURL:
          code = webURL.getcode()
-         html = webURL.read()
-         print(str(code)+" : "+str(html))
+         response = webURL.read()
+         if code == 200:
+            theJSON = json.loads(response)
+            for i in theJSON["features"]:
+                if i["properties"]["mag"] >= 5 :
+                    print(str(i["properties"]["mag"])+" : "+str(i["properties"]["place"]))
     # if path.exists("helloPython.txt") :
     #     src = path.realpath("helloPython.txt")
     #     head, tail = path.split(src)
