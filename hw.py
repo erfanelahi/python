@@ -1,4 +1,3 @@
-
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
@@ -42,15 +41,29 @@ class anotherClass(myClass):
         print("This is anotherDef1")
     def myDef1(self):
         print("myDef1 from anotherClass")
+def isOddNumber(number):
+    if number % 2 == 0 :
+        return False
+    else:
+        return True
+def oddNumbers(number = 1):
+    while(True):
+        if isOddNumber(number): 
+            yield number
+        number += 1
 def main():
-    with urllib.request.urlopen("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson") as webURL:
-         code = webURL.getcode()
-         response = webURL.read()
-         if code == 200:
-            theJSON = json.loads(response)
-            for i in theJSON["features"]:
-                if i["properties"]["mag"] >= 5 :
-                    print(str(i["properties"]["mag"])+" : "+str(i["properties"]["place"]))
+    for n in oddNumbers():
+        if n > 100: 
+            break
+        print(n)
+    # with urllib.request.urlopen("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson") as webURL:
+    #      code = webURL.getcode()
+    #      response = webURL.read()
+    #      if code == 200:
+    #         theJSON = json.loads(response)
+    #         for i in theJSON["features"]:
+    #             if i["properties"]["mag"] >= 5 :
+    #                 print(str(i["properties"]["mag"])+" : "+str(i["properties"]["place"]))
     # if path.exists("helloPython.txt") :
     #     src = path.realpath("helloPython.txt")
     #     head, tail = path.split(src)
