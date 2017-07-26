@@ -51,11 +51,24 @@ def oddNumbers(number = 1):
         if isOddNumber(number): 
             yield number
         number += 1
+class Fibonacci():
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+    def series(self):
+        while(True):
+            yield self.b
+            self.a, self.b = self.b, self.a + self.b
 def main():
-    for n in oddNumbers():
+    myFibonacci = Fibonacci(0, 1)
+    for n in myFibonacci.series():
         if n > 100: 
             break
         print(n)
+    # for n in oddNumbers():
+    #     if n > 100: 
+    #         break
+    #     print(n)
     # with urllib.request.urlopen("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson") as webURL:
     #      code = webURL.getcode()
     #      response = webURL.read()
